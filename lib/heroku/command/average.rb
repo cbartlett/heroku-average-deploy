@@ -11,13 +11,14 @@ class Heroku::Command::Average < Heroku::Command::Run
   # calculates the average time between deploys.
 
   def deploy
-    dates = `heroku releases -n 50 -a #{app} | grep Deploy`
-      .split("\n")
-      .map { |s| s.match(/[\d]{4}\/[\d]{2}\/[\d]{2} [\d]{2}\:[\d]{2}\:[\d]{2}/).to_s }
+
+    releases = api.get_releases(app).data[:body]
+    deploys = releases.select { |h| h['descr'].match(/Deploy/) }
+    dates = deploys.map { |h| Time.parse(h['created_at']) }
 
     seconds = dates.each.with_index.reduce([]) do |a,(d,i)|
       if i != dates.size-1
-        a << Time.parse(d).to_i - Time.parse(dates[i+1]).to_i
+        a << dates[i+1].to_i - d.to_i
       end
       a
     end.instance_eval { reduce(:+) / size.to_f }
