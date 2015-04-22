@@ -11,7 +11,15 @@ along with an average number of deploys per day.
 
 ## Usage
 
-    heroku average:deploy -a your-app-name
+    $ heroku average:deploy -a your-app-name
+
+    Average time between deploys:
+    57643 seconds
+    aka 960 minutes
+    aka 16.01 hours
+    aka 0.67 days
+
+    You deploy an average of 1.5 times per day
 
 ## License
 
