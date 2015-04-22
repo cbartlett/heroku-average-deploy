@@ -1,3 +1,5 @@
+Read about this plugin in my [StatusGator blog post](https://blog.statusgator.io/how-often-do-you-deploy/).
+
 # Heroku average deploy
 
 Striving for continuous delivery, I always wanted to know how often I deploy.
